@@ -59,7 +59,44 @@ Page {
         text: "print to console"
         backgroundColor:"pink"
         x:200
-        y:350
+        y:1100
         onClicked: console.log("hello world")
+    }
+    Rectangle{
+        id:root
+        width:400
+        height:500
+        x:150
+        y:350
+
+        Button{
+            text:"button1"
+            anchors.centerIn: parent
+            onClicked: root.buttonClicked(1)
+
+        }
+
+        Button{
+            text:"button2"
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: root.buttonClicked(2)
+        }
+
+        Button{
+            text:"button3"
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: root.buttonClicked(3)
+        }
+
+        signal buttonClicked (int buttonNumber)
+
+        Connections {
+             target: root
+             onButtonClicked: {
+                console.log("Button", buttonNumber, "clicked")
+             }
+        }
     }
 }
