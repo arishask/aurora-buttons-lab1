@@ -55,25 +55,27 @@ Page {
             }
         ]
     }
+
     Button{
         text: "print to console"
-        backgroundColor:"pink"
+        backgroundColor:"mistyrose"
         x:200
-        y:1100
+        y:950
         onClicked: console.log("hello world")
     }
+
     Rectangle{
         id:root
         width:400
         height:500
         x:150
         y:350
+        color: "transparent"
 
         Button{
             text:"button1"
             anchors.centerIn: parent
             onClicked: root.buttonClicked(1)
-
         }
 
         Button{
@@ -97,6 +99,30 @@ Page {
              onButtonClicked: {
                 console.log("Button", buttonNumber, "clicked")
              }
+        }
+    }
+
+    Button {
+        text: "signal button"
+        x: 200
+        y: 150
+        backgroundColor: "lightblue"
+        color:"black"
+        signal doubleClicked()
+        signal pressed()
+        signal released()
+
+        MouseArea {
+            anchors.fill: parent
+            onPressed: {
+                parent.pressed(console.log("button pressed"));
+            }
+            onReleased: {
+                parent.released(console.log("button released"));
+            }
+            onDoubleClicked: {
+                parent.doubleClicked(console.log("button doubleClicked"));
+            }
         }
     }
 }
